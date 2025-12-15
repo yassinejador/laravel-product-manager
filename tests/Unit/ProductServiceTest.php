@@ -44,12 +44,7 @@ class ProductServiceTest extends DatabaseTestCase
 
     public function test_create_product_with_image(): void
     {
-        // Use a plain file if GD is not available
-        if (extension_loaded('gd')) {
-            $file = UploadedFile::fake()->image('product.jpg');
-        } else {
-            $file = UploadedFile::fake()->create('product.jpg', 100, 'image/jpeg');
-        }
+        $file = UploadedFile::fake()->create('product.txt', 100);
 
         $product = $this->service->createProduct(
             name: 'Product with Image',

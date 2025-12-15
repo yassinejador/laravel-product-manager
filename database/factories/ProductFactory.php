@@ -28,14 +28,10 @@ class ProductFactory extends Factory
 
     private function generateProductImage(): ?string
     {
-        // Skip image generation if GD extension is not available
-        if (!extension_loaded('gd')) {
-            return null;
-        }
-
-        $imageName = 'products/' . $this->faker->uuid() . '.jpg';
-        $fakeImage = File::fake()->image($imageName, 640, 480);
-        Storage::disk('public')->put($imageName, $fakeImage->getContent());
+        // Create a plain text file
+        $imageName = 'products/' . $this->faker->uuid() . '.txt';
+        $fakeFile = File::fake()->create($imageName, 100);
+        Storage::disk('public')->put($imageName, $fakeFile->getContent());
 
         return $imageName;
     }
