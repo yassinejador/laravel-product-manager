@@ -35,14 +35,14 @@ jobs:
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
-          DB_DATABASE: :memory:
+          DB_DATABASE: ':memory:'
         run: php artisan test --no-coverage
 
       - name: Run Unit Tests with Coverage
         env:
           APP_ENV: testing
           DB_CONNECTION: sqlite
-          DB_DATABASE: :memory:
+          DB_DATABASE: ':memory:'
         run: php artisan test --coverage --min=80
         if: github.event_name == 'pull_request'
 
