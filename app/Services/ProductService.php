@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Models\Product;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
@@ -41,6 +40,6 @@ class ProductService
 
     private function storeImage(UploadedFile $file): string
     {
-        return Storage::disk('public')->store('products', 'public');
+        return $file->store('products', 'public');
     }
 }
