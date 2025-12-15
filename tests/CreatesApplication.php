@@ -12,26 +12,24 @@ trait CreatesApplication
      */
     public function createApplication(): Application
     {
-        // Set environment variables for testing
-        putenv('APP_ENV=testing');
-        putenv('DB_CONNECTION=mysql');
-        putenv('DB_DATABASE=laravel_test');
-        putenv('DB_PASSWORD=AQWzsxEDC00');
-
-        $_ENV['APP_ENV'] = 'testing';
-        $_ENV['DB_CONNECTION'] = 'mysql';
-        $_ENV['DB_DATABASE'] = 'laravel_test';
-        $_ENV['DB_PASSWORD'] = 'AQWzsxEDC00';
-
-        $_SERVER['APP_ENV'] = 'testing';
-        $_SERVER['DB_CONNECTION'] = 'mysql';
-        $_SERVER['DB_DATABASE'] = 'laravel_test';
-        $_SERVER['DB_PASSWORD'] = 'AQWzsxEDC00';
+        $this->setEnvIfNotSet('APP_ENV', 'testing');
+        $this->setEnvIfNotSet('DB_CONNECTION', 'mysql');
+        $this->setEnvIfNotSet('DB_DATABASE', 'laravel_test');
+        $this->setEnvIfNotSet('DB_PASSWORD', 'AQWzsxEDC00');
 
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    private function setEnvIfNotSet(string $key, string $value): void
+    {
+        if (!isset($_ENV[$key]) && !isset($_SERVER[$key]) && !getenv($key)) {
+            putenv("{$key}={$value}");
+            $_ENV[$key] = $value;
+            $_SERVER[$key] = $value;
+        }
     }
 }

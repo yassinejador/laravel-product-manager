@@ -11,8 +11,9 @@ abstract class DatabaseTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        // Configure test database
-        config(['database.default' => 'mysql']);
-        config(['database.connections.mysql.database' => 'laravel_test']);
+        $connection = config('database.default');
+        if ($connection === 'mysql') {
+            config(['database.connections.mysql.database' => 'laravel_test']);
+        }
     }
 }
