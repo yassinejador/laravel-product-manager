@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <style>
         :root {
-            --primary-color: #0066cc;
-            --primary-dark: #0052a3;
+            --primary-color: #F54E1F;
+            --primary-dark: #D93D0A;
             --secondary-color: #6c757d;
             --success-color: #28a745;
             --danger-color: #dc3545;
